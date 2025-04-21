@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://51epkkr6ys4r"]
+
+[ext_resource type="Script" path="res://UI/Skill/Skill.gd" id="1_oknnl"]
+[ext_resource type="Texture2D" uid="uid://cfu5532asqfjh" path="res://Assets/Icon/Hunter_16.png" id="2_y2dru"]
+
+[resource]
+script = ExtResource("1_oknnl")
+skill_name = "Bear Trap 2!"
+skill_description = "A heavy, spiked contraption designed to incapacitate and injure. When triggered, the bear trap clamps down on an enemy's leg, causing significant bleeding and reducing their movement speed. "
+skill_icon = ExtResource("2_y2dru")
