@@ -1,0 +1,17 @@
+.godot/
+*.godotproj.lock
+export/
+.import/
+__pycache__/
+*.translation
+*.cfg
+*.tres.orig
+*.remap
+*.hdr
+*.gen.variant_sigs
+*.ctex
+*.ktx2
+*.basis
+*.pck.tmp
+*.zip.tmp
+*.import_cache
