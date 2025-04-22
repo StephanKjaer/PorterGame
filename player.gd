@@ -1,5 +1,10 @@
 extends CharacterBody2D
 
+@onready var inventory_manager = get_node("../InventoryManager") # Assuming InventoryManager is a sibling
+# Or, if InventoryManager is a child of Player:
+# @onready var inventory_manager = get_node("InventoryManager")
+
+
 @export var speed: float = 200.0
 
 func _physics_process(_delta: float) -> void:
@@ -37,26 +42,11 @@ func _perform_weak_attack() -> void:
 func _attempt_pickup() -> void:
 	print("Porter attempts to pick up an item!")
 	
-var inventory = [] # Array of dictionaries: {"item": ItemData, "quantity": int}
-
-func add_item(item_resource: ItemData, quantity: int = 1):
-	for item in inventory:
-		if item.item == item_resource and item_resource.is_stackable:
-			item.quantity += quantity
-			return
-	inventory.append({"item": item_resource, "quantity": quantity})
-
-func remove_item(item_resource: ItemData, quantity: int = 1):
-	for i in range(inventory.size() - 1, -1, -1):
-		if inventory[i].item == item_resource:
-			inventory[i].quantity -= quantity
-			if inventory[i].quantity <= 0:
-				inventory.remove_at(i)
-			return
-	print("Item not found in inventory.")
-
-func get_item_count(item_resource: ItemData) -> int:
-	for item in inventory:
-		if item.item == item_resource:
-			return item.quantity
-	return 0
+# In Player.gd, when picking up an item:
+func _on_item_area_body_entered(body):
+	if body == self:
+		var item_node = get_parent()
+		var item_data = item_node.item_data
+		inventory_manager.add_item(item_data)
+		item_node.queue_free()
+		# The InventoryManager will be responsible for updating the UI later

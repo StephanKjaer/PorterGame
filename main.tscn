@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://c5r1xwlyb2x6p"]
+[gd_scene load_steps=3 format=3 uid="uid://c5r1xwlyb2x6p"]
 
 [ext_resource type="PackedScene" uid="uid://u88mwhsl6en3" path="res://player.tscn" id="1_prnny"]
+[ext_resource type="Script" path="res://data/inventory/inventory_manager.gd" id="2_w0c0f"]
 
 [node name="Main" type="Node2D"]
 
@@ -15,3 +16,6 @@ offset_bottom = 40.0
 [node name="inventory_grid" type="GridContainer" parent="inventory_ui/PanelContainer"]
 layout_mode = 2
 columns = 4
+
+[node name="InventoryManager" type="Node" parent="."]
+script = ExtResource("2_w0c0f")
