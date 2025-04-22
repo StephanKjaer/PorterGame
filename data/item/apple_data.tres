@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://drgl4bn3m0oi"]
+
+[ext_resource type="Texture2D" uid="uid://c4ih8y1byksep" path="res://icon.svg" id="1_dmlyv"]
+[ext_resource type="Script" path="res://data/inventory/item_data.gd" id="2_kcmgh"]
+
+[resource]
+script = ExtResource("2_kcmgh")
+item_name = "apple"
+description = "mmm good apple"
+icon = ExtResource("1_dmlyv")
+is_stackable = true
+max_stack = 99
+use_action = ""
+value = 0

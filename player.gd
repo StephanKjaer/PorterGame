@@ -36,3 +36,27 @@ func _perform_weak_attack() -> void:
 
 func _attempt_pickup() -> void:
 	print("Porter attempts to pick up an item!")
+	
+var inventory = [] # Array of dictionaries: {"item": ItemData, "quantity": int}
+
+func add_item(item_resource: ItemData, quantity: int = 1):
+	for item in inventory:
+		if item.item == item_resource and item_resource.is_stackable:
+			item.quantity += quantity
+			return
+	inventory.append({"item": item_resource, "quantity": quantity})
+
+func remove_item(item_resource: ItemData, quantity: int = 1):
+	for i in range(inventory.size() - 1, -1, -1):
+		if inventory[i].item == item_resource:
+			inventory[i].quantity -= quantity
+			if inventory[i].quantity <= 0:
+				inventory.remove_at(i)
+			return
+	print("Item not found in inventory.")
+
+func get_item_count(item_resource: ItemData) -> int:
+	for item in inventory:
+		if item.item == item_resource:
+			return item.quantity
+	return 0
