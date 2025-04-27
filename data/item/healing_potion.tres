@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://dtep64fy7jtah"]
+
+[ext_resource type="Texture2D" uid="uid://c4ih8y1byksep" path="res://icon.svg" id="1_08vyx"]
+[ext_resource type="Script" path="res://data/item/item_data.gd" id="1_co7oi"]
+
+[resource]
+script = ExtResource("1_co7oi")
+name = "Healing pot "
+description = "mmm yeah healing"
+texture = ExtResource("1_08vyx")
+stackable = true
+use_action = ""
+value = 0

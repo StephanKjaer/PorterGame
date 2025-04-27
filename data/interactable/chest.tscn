@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dt33yg6i35oy5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lp7ta"]
+albedo_color = Color(0.263865, 0.579652, 0.300749, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ojxvp"]
+material = SubResource("StandardMaterial3D_lp7ta")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1nguw"]
+
+[node name="Chest" type="StaticBody2D"]
+collision_layer = 5
+collision_mask = 0
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+scale = Vector2(20, 20)
+mesh = SubResource("BoxMesh_ojxvp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1nguw")

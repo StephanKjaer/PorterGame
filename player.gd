@@ -1,11 +1,11 @@
 extends CharacterBody2D
 
-@onready var inventory_manager = get_node("../InventoryManager") # Assuming InventoryManager is a sibling
-# Or, if InventoryManager is a child of Player:
-# @onready var inventory_manager = get_node("InventoryManager")
-
-
+@export var inventory_data: InventoryData
 @export var speed: float = 200.0
+@onready var interact_ray = $Camera2D/InteractRay
+
+signal toggle_inventory()
+
 
 func _physics_process(_delta: float) -> void:
 	var direction: Vector2 = Vector2.ZERO
@@ -18,35 +18,20 @@ func _physics_process(_delta: float) -> void:
 		direction.y += 1
 	if Input.is_action_pressed("ui_up"):
 		direction.y -= 1
+	if Input.is_action_just_pressed("inventory"):
+		toggle_inventory.emit()
+
+	if Input.is_action_just_pressed("interact"): # Corrected action name
+		interact()
 
 	if direction.length() > 0:
 		velocity = direction.normalized() * speed # Use the base class 'velocity'
+	else:
+		velocity = Vector2.ZERO # Stop movement when no input
 
 	move_and_slide()
-
-	if Input.is_action_just_pressed("support_action"):
-		_perform_support_action()
-
-	if Input.is_action_just_pressed("weak_attack"):
-		_perform_weak_attack()
-
-	if Input.is_action_just_pressed("pickup_item"):
-		_attempt_pickup()
-
-func _perform_support_action() -> void:
-	print("Porter uses a support action!")
-
-func _perform_weak_attack() -> void:
-	print("Porter performs a weak attack!")
-
-func _attempt_pickup() -> void:
-	print("Porter attempts to pick up an item!")
 	
-# In Player.gd, when picking up an item:
-func _on_item_area_body_entered(body):
-	if body == self:
-		var item_node = get_parent()
-		var item_data = item_node.item_data
-		inventory_manager.add_item(item_data)
-		item_node.queue_free()
-		# The InventoryManager will be responsible for updating the UI later
+	
+func interact():
+	if interact_ray.is_colliding():
+		print("interract with", interact_ray.get_collider() )
